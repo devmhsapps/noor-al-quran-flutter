@@ -25,6 +25,13 @@ configure<ApplicationExtension> {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    buildTypes {
+        getByName("release") {
+            // توقيع صالح للتوزيع التجريبي خارج Google Play.
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
 
 configure<KotlinAndroidProjectExtension> {

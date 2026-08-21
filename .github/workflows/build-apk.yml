@@ -33,6 +33,7 @@ jobs:
       - name: Restore custom Android implementation
         run: |
           git checkout -- pubspec.yaml analysis_options.yaml lib test
+          rm -f test/widget_test.dart
           git checkout -- android/app/build.gradle.kts android/app/src/main/AndroidManifest.xml android/app/src/main/kotlin/com/nooralquran android/app/src/main/res
 
       - name: Verify Mosque Mode source

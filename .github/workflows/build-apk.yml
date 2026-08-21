@@ -31,7 +31,14 @@ jobs:
         run: flutter create --platforms=android --org com.nooralquran --project-name noor_al_quran --no-pub --overwrite .
 
       - name: Restore custom Android implementation
-        run: git checkout -- android/app/build.gradle.kts android/app/src/main/AndroidManifest.xml android/app/src/main/kotlin/com/nooralquran android/app/src/main/res
+        run: |
+          git checkout -- pubspec.yaml analysis_options.yaml lib test
+          git checkout -- android/app/build.gradle.kts android/app/src/main/AndroidManifest.xml android/app/src/main/kotlin/com/nooralquran android/app/src/main/res
+
+      - name: Verify Mosque Mode source
+        run: |
+          grep -Fq "وضع الجامع" lib/main.dart
+          ! grep -Fq "Flutter Demo Home Page" lib/main.dart
 
       - name: Get packages and test
         run: |
